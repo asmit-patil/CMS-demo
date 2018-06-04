@@ -1,11 +1,9 @@
+
 var express = require('express')
 var app = express()
 var nunjucks  = require('nunjucks');
-const port = process.env.PORT || 8012;
-var engine = require('consolidate');
+const port = process.env.PORT || 8000;
 app.use('/public', express.static('public'))
-app.set('views', __dirname + '/views');
-app.engine('html', engine.mustache);
 app.set('view engine', 'html')
 var bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -18,68 +16,125 @@ nunjucks.configure('views', {
     express   : app
   });
 
-app.get('/',function(req,res,next){
-    // const options = {  
-    //     url: 'https://cdn.contentstack.io/v3/content_types/home/entries/blt18ca953908cad013?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true',
-    //     method: 'GET'
-        
-    // };
-    
-    // request(options, function(err, res2, body) {
-
-    //     if (err || res2.statusCode !== 200) {
-    //         return res2.sendStatus(500);
-    //     } 
-
-    //     let json = JSON.parse(body);
-    //     console.log(typeof body,"body");
-    //     console.log(typeof json,"json");
-        
-    //     res.render('home',{ 
-    //         entry:json.entry
-    //     })
-    // });
-
-    var urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/home/entries/blt18ca953908cad013?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
-    function getBodies(array) {
-        return Promise.map(urlList, function(url) {
-            return request.getAsync(url).spread(function(response,body) {
-                return JSON.parse(body);
-            });
+var urlList=[];
+function getBodies(array) {
+    return Promise.map(urlList, function(url) {
+        return request.getAsync(url).spread(function(response,body) {
+            return JSON.parse(body);
         });
-    }
+    });
+}
+var urlstart ="https://cdn.contentstack.io/v3/content_types/"
+var urlend="?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"
 
-    // sample usage of helper function
-    getBodies(urlList).then(function(results) {
-        console.log(results)
-        res.render('home',{
-            data:results
+
+
+
+
+app.get('/',function(req,res,next){
+   
+   
+    
+    var getHeader = new Promise(function(resolve, reject) {
+        
+        request.get( options = {  
+            uri: 'https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true',
+            method: 'GET'
+            
+        }, function(err, resp, body) {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(body));
+            }
         })
         
-    }).catch(function(err) {
-        console.log(err)
-    });
+    })
+    
+    var getBody= new Promise(function( resolve,reject){
+        request.get( options = {  
+            uri: 'https://cdn.contentstack.io/v3/content_types/home/entries/blt18ca953908cad013?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true',
+            method: 'GET'
+            
+        },function(err, resp,body){
+            if (err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(body));
+            }
+        })
+    })
+
+    var getFooter = new Promise(function( resolve,reject){
+        request.get( options = {  
+            uri: 'https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true',
+            method: 'GET'
+            
+        },function(err, resp,body){
+            if (err) {
+                reject(err);
+            } else {
+                resolve(JSON.parse(body));
+            }
+        })
+    })
+    Promise.all([getHeader,getBody,getFooter])
+        .then(function(values) 
+        {
+            console.log(values);
+            res.render('home',{
+                    data:values
+            })
+        })
+        .catch(function(err){
+            console.log(err)
+        })
+    // promiseFunction.then(function (result){
+    //     console.log(result)
+    //     res.render('home',{
+    //         data:result
+    //     })
+    // }).catch(function(err){
+    //     console.log(err)
+    // })
+    
+      
+
+//  urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/home/entries/blt18ca953908cad013?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
+    
+
+    
+//     getBodies(urlList).then(function(results) {
+//         console.log(results)
+//         res.render('home',{
+//             data:results
+//         })
+        
+//     }).catch(function(err) {
+//         console.log(err)
+//     });
 })
 
 //footer url ---------> https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true
 //header url---------> https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true
 //contctus url--------->https://cdn.contentstack.io/v3/content_types/contact_us/entries/blt5a15df9d932ed508?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true
-//var request = Promise.promisifyAll(require("request"), {multiArgs: true});
+
 
 app.get('/faq',function(req,res,next){
-    var urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/faq/entries/bltd999512f065ecc68?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
-    function getBodies(array) {
-        return Promise.map(urlList, function(url) {
-            return request.getAsync(url).spread(function(response,body) {
-                return JSON.parse(body);
-            });
-        });
-    }
+     urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/faq/entries/bltd999512f065ecc68?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
+// Lisst=[]   
+// urlLis=["header","faq","footer"]
+// console.log(urlLis)
+// for(i in urlLis){
+//     url= urlstart+urlLis[i]+urlend
 
-
-    // sample usage of helper function
+//     Lisst.push(url)
+// }
+//console.log(Lisst)   
     getBodies(urlList).then(function(results) {
-
+        
+        console.log(results)
+       
         res.render('faq',{
             data:results
         })
@@ -89,20 +144,15 @@ app.get('/faq',function(req,res,next){
     });
 })
 
+  
 app.get('/contactus',function(req,res,next){
-    var urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/contact_us/entries/blt5a15df9d932ed508?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
-    function getBodies(array) {
-        return Promise.map(urlList, function(url) {
-            return request.getAsync(url).spread(function(response,body) {
-                return JSON.parse(body);
-            });
-        });
-    }
+     urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/contact_us/entries/blt5a15df9d932ed508?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
+   
 
 
-    // sample usage of helper function
+   
     getBodies(urlList).then(function(results) {
-
+        console.log(results)
         res.render('contactus',{
             data:results
         })
@@ -110,6 +160,8 @@ app.get('/contactus',function(req,res,next){
     }).catch(function(err) {
         console.log(err)
     });
+// url="https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"
+
 })
 app.listen(port, function(){
     console.log(`Server running at port ${port}: http://localhost:${port}`)
