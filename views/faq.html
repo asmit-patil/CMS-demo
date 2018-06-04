@@ -1,0 +1,81 @@
+{% include "./layouts/header.html" %}    
+
+
+    <div class="container">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">{{data[1].entry.faq.question[0]}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                         <div class="panel-body">{{data[1].entry.faq.answer[0]}}</div>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">{{data[1].entry.faq.question[1]}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">{{data[1].entry.faq.answer[1]}}</div>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">{{data[1].entry.faq.question[2]}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body"> {{data[1].entry.faq.answer[2]}}</div>
+                        </div>
+                    </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">{{data[1].entry.faq.question[3]}}</a>
+                      </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                      <div class="panel-body"> {{data[1].entry.faq.answer[3]}}</div>
+                    </div> 
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">{{data[1].entry.faq.question[4]}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse5" class="panel-collapse collapse">
+                        <div class="panel-body">{{data[1].entry.faq.answer[4]}}</div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">{{data[1].entry.faq.question[5]}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse6" class="panel-collapse collapse">
+                        <div class="panel-body">{{data[1].entry.faq.answer[5]}}</div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">{{data[1].entry.faq.question[6]}}</a>
+                        </h4>
+                    </div>
+                    <div id="collapse7" class="panel-collapse collapse">
+                            <div class="panel-body">{{data[1].entry.faq.answer[6]}}</div>
+                    </div>
+                            
+                </div>
+            </div> 
+        </div>      
+   
+    
+    {% include "./layouts/footer.html" %}

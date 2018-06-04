@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>This Is Task 2</title>
+    <head> 
+        <link rel="stylesheet" href="../public/css/mycss.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="../public/js/myjs.js"></script>
+    
+    </head>
+    <body>
+    <header>
+        <div class="header-container">
+            <a href="{{data[0].entry.header.navbar[0].href}}"> <img class="logo" src="{{data[0].entry.header.logo.url}}" width="100px" /></a>
+            <div class="nav">  
+                <ul>
+                    <li><a href="{{data[0].entry.header.navbar[0].href}}">{{data[0].entry.header.navbar[0].title}}</a></li>
+                    <li><a href="{{data[0].entry.header.navbar[1].href}}">{{data[0].entry.header.navbar[1].title}}</a></li>
+                    <li><a href="{{data[0].entry.header.navbar[2].href}}">{{data[0].entry.header.navbar[2].title}}<i class="fa fa-caret-down"></i></a> 
+                        <ul>
+                            <li><a href="#">link 1</a></li>
+                            <li><a href="#">link 2</a></li>
+                         </ul>
+                    </li>
+                    <li><a href="{{data[0].entry.header.navbar[3].href}}">{{data[0].entry.header.navbar[3].title}}</a></li>       
+                </ul>
+            </div>
+        </div>
+    </header>      
