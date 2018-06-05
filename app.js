@@ -25,24 +25,27 @@ function getBodies(array) {
     });
 }
 var urlstart ="https://cdn.contentstack.io/v3/content_types/"
-var urlend="?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"
-
-
-
-
+var urlend="/entries?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"
+var headerurl= urlstart+"header"+urlend
+var homeurl= urlstart+"home"+urlend
+var footerurl= urlstart+"footer"+urlend
+var faqurl= urlstart+"faq"+urlend
+var contactusurl =urlstart+"contact_us"+urlend
 
 app.get('/',function(req,res,next){
-   
-   
-    
+
     var getHeader = new Promise(function(resolve, reject) {
-        
+       
+        console.log(headerurl)
         request.get( options = {  
-            uri: 'https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true',
+            url: headerurl,
+           
             method: 'GET'
             
         }, function(err, resp, body) {
+          
             if (err) {
+                console.log(1)
                 reject(err);
             } else {
                 resolve(JSON.parse(body));
@@ -52,12 +55,16 @@ app.get('/',function(req,res,next){
     })
     
     var getBody= new Promise(function( resolve,reject){
+        
+        console.log(homeurl)
         request.get( options = {  
-            uri: 'https://cdn.contentstack.io/v3/content_types/home/entries/blt18ca953908cad013?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true',
+            url:homeurl, 
+            
             method: 'GET'
             
         },function(err, resp,body){
             if (err) {
+                console.log(2)
                 reject(err);
             } else {
                 resolve(JSON.parse(body));
@@ -66,12 +73,16 @@ app.get('/',function(req,res,next){
     })
 
     var getFooter = new Promise(function( resolve,reject){
+        
+        console.log(footerurl)
         request.get( options = {  
-            uri: 'https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true',
+            url: footerurl,
+           
             method: 'GET'
             
         },function(err, resp,body){
             if (err) {
+                console.log(3)
                 reject(err);
             } else {
                 resolve(JSON.parse(body));
@@ -98,39 +109,14 @@ app.get('/',function(req,res,next){
     //     console.log(err)
     // })
     
-      
-
-//  urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/home/entries/blt18ca953908cad013?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
     
-
-    
-//     getBodies(urlList).then(function(results) {
-//         console.log(results)
-//         res.render('home',{
-//             data:results
-//         })
-        
-//     }).catch(function(err) {
-//         console.log(err)
-//     });
 })
-
-//footer url ---------> https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true
-//header url---------> https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true
-//contctus url--------->https://cdn.contentstack.io/v3/content_types/contact_us/entries/blt5a15df9d932ed508?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true
 
 
 app.get('/faq',function(req,res,next){
-     urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/faq/entries/bltd999512f065ecc68?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
-// Lisst=[]   
-// urlLis=["header","faq","footer"]
-// console.log(urlLis)
-// for(i in urlLis){
-//     url= urlstart+urlLis[i]+urlend
 
-//     Lisst.push(url)
-// }
-//console.log(Lisst)   
+urlList=[headerurl,faqurl,footerurl]
+console.log(urlList)
     getBodies(urlList).then(function(results) {
         
         console.log(results)
@@ -146,11 +132,8 @@ app.get('/faq',function(req,res,next){
 
   
 app.get('/contactus',function(req,res,next){
-     urlList=["https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/contact_us/entries/blt5a15df9d932ed508?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true","https://cdn.contentstack.io/v3/content_types/footer/entries/blt18fe59745b5ecd54?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"]
-   
-
-
-   
+    
+   urlList=[headerurl,contactusurl,footerurl]
     getBodies(urlList).then(function(results) {
         console.log(results)
         res.render('contactus',{
@@ -160,7 +143,7 @@ app.get('/contactus',function(req,res,next){
     }).catch(function(err) {
         console.log(err)
     });
-// url="https://cdn.contentstack.io/v3/content_types/header/entries/bltb486361a97a80102?api_key=bltd1343376dfba54d2&access_token=bltfe57b09b1e4c5732&environment=staging&locale=en-us&include_dimension=true"
+
 
 })
 app.listen(port, function(){

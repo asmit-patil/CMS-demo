@@ -1,7 +1,7 @@
 {% include "./layouts/header.html" %}
 <div class="container">
-        <h2>{{data[1].entry.form.h2}}</h2>
-        <h4>{{data[1].entry.form.h4}}</h4>
+        <h2>{{data[1].entries[0].form.h2}}</h2>
+        <h4>{{data[1].entries[0].form.h4}}</h4>
         <p id="p1"></p>
         <div class="full-form-container">
     
@@ -9,7 +9,7 @@
                 <div class="querry-form">
                     
                     <div class="self">
-                        <h3>{{data[1].entry.form.h3_1}}</h3>
+                        <h3>{{data[1].entries[0].form.h3_1}}</h3>
                        
                         <div class="form1">
                             <input class="name1" id="fname" type="text" placeholder="Your Name"  >
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="business">
-                        <h3>{{data[1].entry.form.h3_2}}</h3>
+                        <h3>{{data[1].entries[0].form.h3_2}}</h3>
                         <input class="name1" id="cname" type="text" placeholder="Company Name" >
                         <input class="name1" id="job" type="text" placeholder="Job Title" >
                         <select id="business"><option value="---select a business type---">---Select a business type---</option>
@@ -36,7 +36,7 @@
                     </div>
                 </div>
                 <textarea rows="5"  placeholder="To help us provide you with the fastest and more accurate responce, please leave us deatailed message."></textarea> 
-                <div class="submit" ><button class="sub"  type="submit" value="Submit" onclick="focusMethod()" >{{data[1].entry.form.btn_name}}</button></div>
+                <div class="submit" ><button class="sub"  type="submit" value="Submit" onclick="focusMethod()" >{{data[1].entries[0].form.btn_name}}</button></div>
             </form>
         </div>
     </div>
