@@ -40,9 +40,6 @@ var promiseFunction = function (url){
             if (err) {
                return reject(err)
             } else {
-                // console.log(resp)
-                // console.log(typeof resp)
-                // console.log(body)
                 console.log(typeof body)
                 return resolve(JSON.parse(body))
             }
