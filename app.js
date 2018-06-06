@@ -50,23 +50,39 @@ var promiseFunction = function (url){
         
     })
 }
-
-app.get('/', function(req,res,next){
-    getHeader = promiseFunction(headerurl)
-    getBody = promiseFunction(homeurl)
-    getFooter = promiseFunction(footerurl)
-    Promise.all([getHeader, getBody, getFooter])
+var callingPromiseAll=function(urlArray,viewname,res){
+    Promise.all(urlArray)
         .then(function(values) 
         {   
             var data
-            console.log(typeof values, "fdgggggggggggggggggg");
-            res.render('home', {
+            console.log( values, "fdgggggggggggggggggg");
+            res.render(viewname, {
                     data:values
             })
         })
         .catch(function(err){
             console.log(err)
         })   
+}
+
+app.get('/', function(req,res,next){
+    getHeader = promiseFunction(headerurl)
+    getBody = promiseFunction(homeurl)
+    getFooter = promiseFunction(footerurl)
+    var urlArray=[getHeader, getBody, getFooter]
+    callingPromiseAll(urlArray,'home',res)
+    // Promise.all([getHeader, getBody, getFooter])
+    //     .then(function(values) 
+    //     {   
+    //         var data
+    //         console.log( values, "fdgggggggggggggggggg");
+    //         res.render('home', {
+    //                 data:values
+    //         })
+    //     })
+    //     .catch(function(err){
+    //         console.log(err)
+    //     })   
 })
 
 
@@ -74,18 +90,8 @@ app.get('/faq', function(req, res, next){
     getHeader = promiseFunction(headerurl)
     getBody = promiseFunction(faqurl)
     getFooter = promiseFunction(footerurl)
-    Promise.all([getHeader, getBody, getFooter])
-        .then(function(values) 
-        {   var data
-            console.log(values)
-            var name = 'faq'
-            res.render(name, {
-                    data:values
-            })
-        })
-        .catch(function(err){
-            console.log(err)
-        })
+    var urlArray=[getHeader, getBody, getFooter]
+    callingPromiseAll(urlArray,'faq',res)
 })
 
   
@@ -104,18 +110,8 @@ app.get('/contactus', function(req, res, next){
     getHeader = promiseFunction(headerurl)
     getBody = promiseFunction(contactusurl)
     getFooter = promiseFunction(footerurl)
-    Promise.all([getHeader, getBody, getFooter])
-        .then(function(values) 
-        {   var data
-            console.log(values)
-            res.render('contactus', {
-                    data:values
-            })
-        })
-        .catch(function(err){
-            console.log(err)
-        })
-
+    var urlArray=[getHeader, getBody, getFooter]
+    callingPromiseAll(urlArray,'contacus',res)
 })
 app.listen(port, function(){
     console.log(`Server running at port ${port}: http://localhost:${port}`)
