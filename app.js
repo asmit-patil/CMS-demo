@@ -47,7 +47,7 @@ var promiseFunction = function (url){
         
     })
 }
-var callingPromiseAll=function(urlArray,viewname,res){
+var promiseAll = function(urlArray, viewname, res){
     Promise.all(urlArray)
         .then(function(values) 
         {   
@@ -67,7 +67,7 @@ app.get('/', function(req,res,next){
     getBody = promiseFunction(homeurl)
     getFooter = promiseFunction(footerurl)
     var urlArray=[getHeader, getBody, getFooter]
-    callingPromiseAll(urlArray,'home',res)
+    promiseAll(urlArray, 'home', res)
     // Promise.all([getHeader, getBody, getFooter])
     //     .then(function(values) 
     //     {   
@@ -88,7 +88,7 @@ app.get('/faq', function(req, res, next){
     getBody = promiseFunction(faqurl)
     getFooter = promiseFunction(footerurl)
     var urlArray=[getHeader, getBody, getFooter]
-    callingPromiseAll(urlArray,'faq',res)
+    promiseAll(urlArray, 'faq', res)
 })
 
   
@@ -108,7 +108,7 @@ app.get('/contactus', function(req, res, next){
     getBody = promiseFunction(contactusurl)
     getFooter = promiseFunction(footerurl)
     var urlArray=[getHeader, getBody, getFooter]
-    callingPromiseAll(urlArray,'contacus',res)
+    promiseAll(urlArray, 'contacus', res)
 })
 app.listen(port, function(){
     console.log(`Server running at port ${port}: http://localhost:${port}`)
