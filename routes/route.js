@@ -36,7 +36,6 @@ var promiseFunction = function (url){
                 return resolve(JSON.parse(body))
             } else {
                 var error = new Error(resp.statusText)
-               // error.resp = resp
                 throw error
             }
         })
