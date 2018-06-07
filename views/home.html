@@ -1,4 +1,5 @@
-{% include "./layouts/header.html" %}
+{% extends "parent.html" %}
+{% block main_body %}
     <div class="container">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
@@ -50,4 +51,4 @@
            </div>
     </div> 
     
-    {% include "./layouts/footer.html" %}
+{% endblock %}   
