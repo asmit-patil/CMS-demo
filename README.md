@@ -6,7 +6,7 @@ Creating this demo project to learn working of nodejs and its express framework.
 
 #To get the code on your machine:
 
-Clone this code from https://github.com/almeida-shrutika/Demo-Task.git
+Clone this code from git@github.com:asmit-patil/CMS-demo.git
 
 #To install and run:
 
