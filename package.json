@@ -1,13 +1,12 @@
 {
   "name": "webpage_using_cms",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "creating webpage using cms",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Asmit Patil",
   "dependencies": {
     "express": "^4.16.3", 
     "nunjucks": "^3.1.2",
