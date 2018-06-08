@@ -1,6 +1,8 @@
 # CMS-demo
+
 # Description
-Creating this demo project to learn working of nodejs and its express framework. Additional part is I am taking all the needed content for this webpage from Contentstack i.e for this I ahev creadted one stack for my project in contenstack and according to my webpage I have created various content type and then added entries in respective contents. I am taking this content data from respective url of content type which is provide by contentstack.
+
+Creating this demo project to learn working of nodejs and its express framework. Additional part is I am taking all the needed content for this webpage from Contentstack i.e for this I have creadted one stack for my project in contenstack and according to my webpage I have created various content type and then added entries in respective contents. I am taking this content data from respective url of content type which is provide by contentstack.
 
 # Getting started
 
