@@ -14,18 +14,14 @@ exports.home = function(req, res){
 }
 
 exports.getresource = function(req, res){
-    console.log(res.statusCode)
-    return res.send({
-        fname : "asmit",
-        "lname" : "patil"
-
-    })
+    return res.send("test")
 }
 
 exports.testdemo = function(req, res){
     request.get('http://localhost:3000/test', function(err, resp, body){
         console.log(typeof body)
-        res.send(body)
+        var e = JSON.parse(body)
+        res.send(e)
     })
 
 }
