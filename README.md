@@ -13,7 +13,8 @@ Clone this code from -----> git@github.com:asmit-patil/CMS-demo.git
 To install ----> npm install     
 To run ----> node app.js
 
-#Code Overview
+# Code Overview
+
 #Various dependencies
 
 express: Express is a flexible Node.js web application framework.
@@ -72,5 +73,5 @@ views/ - This folder contains all the views like homepage, conactus page etc.
 
 controller/ - This folder contains code for all the dummy/skeleton callback functions which are invoke by their respective route. 
 
-utilities/ This folder contains the common code(promises function) used by all routes.
+utilities/ - This folder contains the common code(promises function) used by all routes.
 
