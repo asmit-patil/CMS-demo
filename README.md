@@ -4,11 +4,18 @@
 
 Creating this demo project to learn working of nodejs and its express framework. Additional part is I am taking all the needed content for this webpage from Contentstack i.e for this I have creadted one stack for my project in contenstack and according to my webpage I have created various content type and then added entries in respective contents. I am taking this content data from respective url of content type which is provide by contentstack.
 
+# Requirements
+
+#Nodejs
+
+To download nodejs use this ----> https://nodejs.org/en/download/
+
+
 # Getting started
 
 #To get the code on your machine:
 
-Clone this code from -----> git@github.com:asmit-patil/CMS-demo.git   
+Clone this code from ----> git@github.com:asmit-patil/CMS-demo.git   
 
 #To install and run:
 
