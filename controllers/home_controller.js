@@ -1,6 +1,6 @@
 var request = require('request')
-var promise = require('../utilities/promiseUtility')
-var config = require('../configuration/config')
+var promise = require('../models/contentstack')
+var config = require('../configuration/constants')
 
 
 exports.home = function(req, res){
@@ -14,14 +14,29 @@ exports.home = function(req, res){
 }
 
 exports.getresource = function(req, res){
-    return res.send("test")
+    return res.send({
+        "test":"demo"
+    })
 }
-
+function IsJsonString(str) {
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
+}
 exports.testdemo = function(req, res){
     request.get('http://localhost:3000/test', function(err, resp, body){
-        console.log(typeof body)
-        var e = JSON.parse(body)
-        res.send(e)
+            console.log(typeof body)
+            var bool= IsJsonString(body)
+            console.log(bool)
+            if(bool == false){
+                res.render('error')
+            }
+            else{
+                res.send(body)
+            }
     })
 
 }

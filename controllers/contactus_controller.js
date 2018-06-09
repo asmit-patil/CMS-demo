@@ -1,7 +1,7 @@
 
 
-var promise = require('../utilities/promiseUtility')
-var config = require('../configuration/config')
+var promise = require('../models/contentstack')
+var config = require('../configuration/constants')
 
 exports.contactus = function(req, res, next){
     

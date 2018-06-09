@@ -10,11 +10,13 @@ var promise =
         if (err) {
             return reject(err)
         }else if (resp.statusCode >= 200 && resp.statusCode < 300) {
-             console.log(typeof body,"_____________body type")
+             console.log(typeof JSON.parse(body),"_____________body type")
+             //body="string"
              return resolve(JSON.parse(body))
         } else {
-             var error = new Error(resp.statusText)
-             throw error
+            if((typeof (JSON.parse(body))) != "object"){
+                res.render('error')
+            }
         }
         })     
     })
